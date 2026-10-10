@@ -24,5 +24,12 @@ pipeline {
                 echo 'Website index.html found successfully.'
             }
         }
+    
+            stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t intellipaat-website:${BUILD_NUMBER} -t intellipaat-website:latest .'
+            }
+        }
     }
+    
 }
