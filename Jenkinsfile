@@ -90,8 +90,11 @@ pipeline {
                           --user=jenkins-deployer \
                           --namespace="$K8S_NAMESPACE" \
                           --kubeconfig="$KUBECONFIG_FILE"
+                          kubectl config use-context capstone \
+                          --kubeconfig="$KUBECONFIG_FILE"
                           kubectl --kubeconfig="$KUBECONFIG_FILE" config view --minify
                           kubectl --kubeconfig="$KUBECONFIG_FILE" get --raw=/version
+                          
 
                         kubectl --kubeconfig="$KUBECONFIG_FILE" \
                           set image deployment/intellipaat-website \
