@@ -74,6 +74,7 @@ pipeline {
                         KUBECONFIG_FILE="$(mktemp)"
                         trap 'rm -f "$KUBECONFIG_FILE"' EXIT
                         chmod 600 "$KUBECONFIG_FILE"
+                        export KUBECONFIG="$KUBECONFIG_FILE"
 
                         kubectl config set-cluster capstone \
                           --server="$K8S_API" \
