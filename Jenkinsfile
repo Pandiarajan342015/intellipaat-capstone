@@ -62,6 +62,11 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+        when {
+             expression {
+            new Date().format('d', TimeZone.getTimeZone('UTC')) == '25'
+        }
+    }
             steps {
                 withCredentials([string(
                     credentialsId: 'k8s-deployer-token',
