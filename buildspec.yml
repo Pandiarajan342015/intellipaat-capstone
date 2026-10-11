@@ -3,7 +3,7 @@ phases:
   pre_build:
     commands:
       - echo "Logging in to Docker Hub"
-      - echo "$DOCKERHUB_USERNAME" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+      - echo "$DOCKERHUB_PASSWORD" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
   build:
     commands:
       - echo "Building the website Docker image"
