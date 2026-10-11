@@ -1,0 +1,16 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - echo "Logging in to Docker Hub"
+      - echo "$DOCKERHUB_USERNAME" | docker login --username "$DOCKERHUB_USERNAME" --password-stdin
+  build:
+    commands:
+      - echo "Building the website Docker image"
+      - docker build -t "$DOCKERHUB_USERNAME/intellipaat-website:$CODEBUILD_RESOLVED_SOURCE_VERSION" .
+      - docker tag "$DOCKERHUB_USERNAME/intellipaat-website:$CODEBUILD_RESOLVED_SOURCE_VERSION" "$DOCKERHUB_USERNAME/intellipaat-website:latest"
+  post_build:
+    commands:
+      - echo "Pushing images to Docker Hub"
+      - docker push "$DOCKERHUB_USERNAME/intellipaat-website:$CODEBUILD_RESOLVED_SOURCE_VERSION"
+      - docker push "$DOCKERHUB_USERNAME/intellipaat-website:latest"
